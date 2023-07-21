@@ -12,7 +12,7 @@ module.exports = {
         'primary': '#7F00FF',
         'title': '#262626',
         'task': '#292929',
-        'date': '#4A4A4A'
+        'date': '#4A4A4A',
 
       },
       backgroundImage: {

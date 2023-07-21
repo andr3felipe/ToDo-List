@@ -1,9 +1,13 @@
-import TodoList from "./TodoList";
-import DoneList from "./DoneList";
-import TasksList from "./TasksList";
+import Done from "./Done"
+import ListAll from "./ListAll"
+import NotDone from "./NotDone"
+import Task from "./Task"
+import TaskCreateEditInput from "./TaskCreateEditInput"
 
 export {
-  TodoList,
-  DoneList,
-  TasksList
+  Done,
+  ListAll,
+  NotDone,
+  Task,
+  TaskCreateEditInput
 }
