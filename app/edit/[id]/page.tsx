@@ -52,7 +52,7 @@ export default function Edit({ params }: any) {
             disabled={ isSubmitSuccessful || isSubmitting }
             type="submit"
             className={`min-h-[76px] min-w-full rounded-lg mt-[225px] bg-task-done text-white shadow-purple`}>
-            Edit Task
+            Edit task
           </button>
         </form>
       </main>
