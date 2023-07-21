@@ -19,41 +19,19 @@ interface editTask {
 
 interface TasksContextProps {
   tasks: Task[]
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
   addTask: (task: Task) => void
   taskState: ({ id, isDone }: taskState) => void
   editTask: ({ id, title }: editTask) => void
+  deleteTask: (id: string) => void
+  getLocalStorage: () => Task[] | null
+  setLocalStorage: () => void
 }
 
 const TasksContext = createContext({} as TasksContextProps)
 export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: '1',
-      title: 'Wake Up!',
-      isDone: true
-    },
-    {
-      id: '2',
-      title: 'Daily workout',
-      isDone: true,
-    },
-    {
-      id: '3',
-      title: 'Briefing with Lokanaka',
-      isDone: false,
-    },
-    {
-      id: '4',
-      title: 'Pitching with John',
-      isDone: false,
-    },
-    {
-      id: '5',
-      title: 'Design Landing Page',
-      isDone: false,
-    },
-  ])
+  const [tasks, setTasks] = useState<Task[]>([])
   
   function addTask(task: Task) {
     setTasks(state => [...state, task])
@@ -79,8 +57,34 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     }))
   }
 
+  function deleteTask(id: string) {
+    setTasks(state => state.filter(task => task.id !== id))
+
+    if (tasks.length === 1) {
+      window.localStorage.removeItem('@todo-1.0.0')
+    }
+  }
+
+  function getLocalStorage() {
+    const data = window.localStorage.getItem('@todo-1.0.0')
+  
+    if (data) {
+      const parsed = JSON.parse(data)
+
+      return parsed
+    }
+
+    return null
+  }
+
+  function setLocalStorage() {
+    window.localStorage.setItem('@todo-1.0.0', JSON.stringify(tasks))
+  }
+
   return (
-    <TasksContext.Provider value={{ tasks, addTask, taskState, editTask }}>
+    <TasksContext.Provider 
+    value={{ tasks, addTask, taskState, editTask, 
+    deleteTask, getLocalStorage, setLocalStorage, setTasks }}>
       {children}
     </TasksContext.Provider>
   );

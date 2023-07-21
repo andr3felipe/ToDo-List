@@ -22,7 +22,7 @@ export default function Task({ isDone, title, id }: TaskProps) {
         }, color: `${isDone ? 'white' : '#bfbfbf'}` }}/>
 
       <div className="flex-1 min-h-[34px]">
-        <p className={`${isDone ? 'text-white' : 'text-task'}`}>{title}</p>
+        <p className={`${isDone ? 'text-white' : 'text-task'} break-all`}>{title}</p>
       </div>
       <Link href={`/edit/${id}`}>
       <button className={`${isDone ? 'text-white' : 'text-black'}`}>

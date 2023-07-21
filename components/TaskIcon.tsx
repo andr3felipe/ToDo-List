@@ -1,6 +1,6 @@
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
-export const Icon = () => (
+export const TaskIcon = () => (
   <>
     <svg width={0} height={0}>
       <linearGradient id="linearColors" x1={1} y1={0} x2={1} y2={1}>

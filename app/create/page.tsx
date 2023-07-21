@@ -1,17 +1,17 @@
 'use client'
 
 import { v4 as uuidv4 } from 'uuid';
-import { useForm } from "react-hook-form";
-import { Icon, NavigateHome } from "@/components";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { TaskIcon, NavigateHome } from "@/components";
 import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from 'next/navigation';
 
 export default function Create() {
-  const { addTask } = useTasksContext()
+  const { addTask, setLocalStorage } = useTasksContext()
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm()
   const router = useRouter()
 
-  function handleAddTask(create) {
+  const handleAddTask: SubmitHandler<FieldValues> = (create) => {
     const { create: title } = create
 
     const task = {
@@ -21,7 +21,7 @@ export default function Create() {
       }
   
     addTask(task)
-
+    
     router.push('/')
   }
 
@@ -32,13 +32,15 @@ export default function Create() {
         <h4>Task title</h4>
         <form onSubmit={handleSubmit(handleAddTask)} className="flex flex-col">
           <div className="mt-[10px] bg-task-to-do w-full flex px-4 py-[22px] rounded">
-            <Icon />
+            <TaskIcon />
             <label htmlFor="create" className="flex-1 pl-[25px]">
-              <input type="text" 
+              <input 
+                autoComplete='off'
+                type="text" 
                 id="create" 
                 className="w-full bg-transparent placeholder:font-semibold outline-none"
                 placeholder="Type here"
-                {...register('create', { required: true })}
+                {...register('create', { required: true, maxLength: 200 })}
               />
             </label>
           </div>

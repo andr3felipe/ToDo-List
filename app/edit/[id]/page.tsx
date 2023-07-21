@@ -1,38 +1,49 @@
 'use client'
 
-import { Icon, NavigateHome } from "@/components";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { TaskIcon, NavigateHome } from "@/components";
 import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { TrashIcon } from '@/components/TrashIcon';
 
 export default function Edit({ params }: any) {
-  const { editTask } = useTasksContext()
+  const { editTask, deleteTask } = useTasksContext()
   const router = useRouter()
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm()
 
   const id = params.id
 
-  function handleEditTask(edit) {
+  const handleEditTask: SubmitHandler<FieldValues> = (edit) => {
     const { edit: title } = edit
 
-    editTask({ id, title })
-
+    editTask({id, title})
+    
     router.push('/')
   }
 
   return (
     <div className="p-[30px] pl-[18px] max-w-7xl mx-auto">
+      <div className='flex items-center justify-between'>
       <NavigateHome title={['Edit', 'Task']} />
+      <button type='button' onClick={() => {
+        deleteTask(id)
+        router.push('/')
+      }}>
+        <TrashIcon />
+      </button>
+      </div>
       <main className="text-[18px] mt-[259px] mx-[12px]">
         <h4>Task title</h4>
         <form onSubmit={handleSubmit(handleEditTask)} className="flex flex-col">
           <div className="mt-[10px] bg-task-to-do w-full flex px-4 py-[22px] rounded">
-            <Icon />
+            <TaskIcon />
             <label htmlFor="edit" className="flex-1 pl-[25px]">
-              <input type="text" id="edit" 
+              <input
+                autoComplete='off'
                 className="w-full bg-transparent placeholder:font-semibold outline-none"
                 placeholder="Type here"
-                {...register('edit', { required: true })}
+                {...register("edit", { required: true })}
               />
             </label>
           </div>

@@ -2,8 +2,26 @@
 
 import { Done, NotDone } from "@/components/Task";
 import { useTasksContext } from '@/context/TasksContext';
+import { useEffect } from 'react'
+
 export default function ListAll() {
-  const { tasks }  = useTasksContext()
+  const { tasks, getLocalStorage, setLocalStorage, setTasks }  = useTasksContext()
+
+  useEffect(() => {
+   if (tasks.length === 0) {
+    const data = getLocalStorage()
+
+    if (data && data.length > 0) {
+      setTasks(data)
+    }
+   }
+   
+   if (tasks.length) {
+    return setLocalStorage()
+   }
+
+  }, [tasks, getLocalStorage, setLocalStorage, setTasks])
+
   const doneCount = tasks.reduce((count, task) => {
     if(task.isDone) {
       count++
