@@ -1,6 +1,5 @@
 'use client'
 
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { TaskIcon, NavigateHome } from "@/components";
 import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from "next/navigation";
