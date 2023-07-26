@@ -7,7 +7,7 @@ import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from 'next/navigation';
 
 export default function Create() {
-  const { addTask, setLocalStorage } = useTasksContext()
+  const { addTask } = useTasksContext()
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm()
   const router = useRouter()
 
@@ -38,13 +38,13 @@ export default function Create() {
                 autoComplete='off'
                 type="text" 
                 id="create" 
-                className="w-full bg-transparent placeholder:font-semibold outline-none"
+                className="w-full bg-transparent outline-none placeholder:font-semibold"
                 placeholder="Type here"
-                {...register('create', { required: true, maxLength: 200 })}
+                {...register('create', { required: true })}
               />
             </label>
           </div>
-          {errors.create && <span className="text-red-500 font-600 mx-auto text-xs">This field is required</span>}
+          {errors.create && <span className="mx-auto text-xs text-red-500 font-600">This field is required</span>}
           <button disabled={ isSubmitSuccessful || isSubmitting } type="submit" className={`min-h-[76px] mt-[225px] min-w-full rounded-lg bg-task-done text-white shadow-purple disabled:cursor-not-allowed disabled:opacity-30`}>
             Create task
           </button>

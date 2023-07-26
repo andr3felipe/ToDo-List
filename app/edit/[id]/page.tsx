@@ -6,12 +6,17 @@ import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { TrashIcon } from '@/components/TrashIcon';
 
-export default function Edit({ params }: any) {
+interface EditProps {
+  params: {
+    id: string
+  }
+}
+export default function Edit({ params }: EditProps) {
   const { editTask, deleteTask } = useTasksContext()
   const router = useRouter()
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm()
 
-  const id = params.id
+  const { id } = params
 
   const handleEditTask: SubmitHandler<FieldValues> = (edit) => {
     const { edit: title } = edit
@@ -40,13 +45,13 @@ export default function Edit({ params }: any) {
             <label htmlFor="edit" className="flex-1 pl-[25px]">
               <input
                 autoComplete='off'
-                className="w-full bg-transparent placeholder:font-semibold outline-none"
+                className="w-full bg-transparent outline-none placeholder:font-semibold"
                 placeholder="Type here"
                 {...register("edit", { required: true })}
               />
             </label>
           </div>
-          {errors.edit && <span className="text-red-500 font-600 mx-auto text-xs">This field is required</span>}
+          {errors.edit && <span className="mx-auto text-xs text-red-500 font-600">This field is required</span>}
           <button 
             disabled={ isSubmitSuccessful || isSubmitting }
             type="submit"

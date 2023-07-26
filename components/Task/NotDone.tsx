@@ -6,7 +6,7 @@ export default function NotDone() {
   const { tasks }  = useTasksContext()
 
   return (
-    <div className="bg-task-to-do rounded-lg">
+    <div className="rounded-lg bg-task-to-do">
       {tasks.map(task => {
         const { id, isDone, title } = task
         if (!isDone) {

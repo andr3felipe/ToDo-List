@@ -37,7 +37,7 @@ export default function ListAll() {
         <p className="text-sm text-primary self-end">{doneCount}/{tasks.length} Task finished</p>
       </div>
       <div className="flex flex-col gap-9">
-      { doneCount > 0 ? <Done /> : null }
+      { doneCount > 0 && <Done /> }
       <NotDone />
       </div>
     </main>
