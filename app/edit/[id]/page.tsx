@@ -1,10 +1,10 @@
 'use client'
 
-import { TaskIcon, NavigateHome } from "@/components";
+import { TaskIcon, NavigateHome, TrashIcon } from "@/components";
 import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { TrashIcon } from '@/components/TrashIcon';
+import { Button } from "@/components/Button";
 
 interface EditProps {
   params: {
@@ -29,7 +29,9 @@ export default function Edit({ params }: EditProps) {
   return (
     <div className="p-[30px] pl-[18px] max-w-7xl mx-auto">
       <div className='flex items-center justify-between'>
-      <NavigateHome title={['Edit', 'Task']} />
+      <NavigateHome >
+        Edit <br /> task
+      </NavigateHome>
       <button type='button' onClick={() => {
         deleteTask(id)
         router.push('/')
@@ -52,12 +54,9 @@ export default function Edit({ params }: EditProps) {
             </label>
           </div>
           {errors.edit && <span className="mx-auto text-xs text-red-500 font-600">This field is required</span>}
-          <button 
-            disabled={ isSubmitSuccessful || isSubmitting }
-            type="submit"
-            className={`min-h-[76px] min-w-full rounded-lg mt-[225px] bg-task-done text-white shadow-purple`}>
+          <Button disabled={ isSubmitSuccessful || isSubmitting }>
             Edit task
-          </button>
+          </Button >
         </form>
       </main>
   </div>

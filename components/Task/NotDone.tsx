@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Task } from "@/components/Task";
 import { useTasksContext } from "@/context/TasksContext";
 
@@ -15,10 +14,6 @@ export default function NotDone() {
           )
         }
       })}
-      <Link href={`/create`} aria-label="Create task">
-        <button className="min-h-[76px] min-w-full rounded-lg bg-task-done text-white shadow-purple mt-5"
-      >Create task</button>
-      </Link>      
     </div>
   )
 }

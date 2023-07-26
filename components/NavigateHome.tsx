@@ -2,15 +2,15 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Link from "next/link";
 
 interface NavigateBeforeProps {
-  title: string[]
+  children: React.ReactNode
 }
-export default function NavigateBefore({ title }: NavigateBeforeProps) {
+export default function NavigateHome({ children }: NavigateBeforeProps) {
   return (
     <header>
         <nav>
           <Link href={`/`} className="flex gap-[6px]">
             <NavigateBeforeIcon />
-            <h1 className="text-2xl">{title[0]} <br /> {title[1]}</h1>
+            <h1 className="text-2xl">{children}</h1>
             </Link>
         </nav>
       </header>

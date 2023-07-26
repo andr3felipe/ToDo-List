@@ -5,6 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { TaskIcon, NavigateHome } from "@/components";
 import { useTasksContext } from "@/context/TasksContext";
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/Button';
 
 export default function Create() {
   const { addTask } = useTasksContext()
@@ -27,7 +28,9 @@ export default function Create() {
 
   return (
     <div className="p-[30px] pl-[18px] max-w-7xl mx-auto">
-      <NavigateHome title={['Create', 'Task']} />
+      <NavigateHome >
+        Create <br /> task
+      </NavigateHome>
       <main className="text-[18px] mt-[259px] mx-[12px]">
         <h4>Task title</h4>
         <form onSubmit={handleSubmit(handleAddTask)} className="flex flex-col">
@@ -45,9 +48,9 @@ export default function Create() {
             </label>
           </div>
           {errors.create && <span className="mx-auto text-xs text-red-500 font-600">This field is required</span>}
-          <button disabled={ isSubmitSuccessful || isSubmitting } type="submit" className={`min-h-[76px] mt-[225px] min-w-full rounded-lg bg-task-done text-white shadow-purple disabled:cursor-not-allowed disabled:opacity-30`}>
+          <Button disabled={ isSubmitSuccessful || isSubmitting }>
             Create task
-          </button>
+          </Button>
         </form>
       </main>
   </div>
