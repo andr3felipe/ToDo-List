@@ -18,8 +18,8 @@ export default function Edit({ params }: EditProps) {
 
   const { id } = params
 
-  const handleEditTask: SubmitHandler<FieldValues> = (edit) => {
-    const { edit: title } = edit
+  const handleEditTask: SubmitHandler<FieldValues> = ({edit}) => {
+    const title = edit
 
     editTask({id, title})
     

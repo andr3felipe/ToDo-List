@@ -11,8 +11,8 @@ export default function Create() {
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm()
   const router = useRouter()
 
-  const handleAddTask: SubmitHandler<FieldValues> = (create) => {
-    const { create: title } = create
+  const handleAddTask: SubmitHandler<FieldValues> = ({create}) => {
+    const title = create
 
     const task = {
         id: uuidv4(),
